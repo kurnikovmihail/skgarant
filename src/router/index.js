@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProjectView from '../views/ProjectView.vue'
 
+let isInitialNavigation = true
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -16,12 +18,23 @@ const router = createRouter({
       component: ProjectView,
     },
   ],
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
+    const isFirstNavigation = isInitialNavigation
+    isInitialNavigation = false
+
     if (savedPosition) {
       return savedPosition
     }
 
     if (to.hash) {
+      if (isFirstNavigation) {
+        const url = new URL(window.location.href)
+        url.hash = ''
+        window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}`)
+
+        return { top: 0, left: 0, behavior: 'auto' }
+      }
+
       return {
         el: to.hash,
         top: 88,
@@ -29,7 +42,11 @@ const router = createRouter({
       }
     }
 
-    return { top: 0 }
+    if (to.path === '/') {
+      return { top: 0, left: 0, behavior: 'auto' }
+    }
+
+    return { top: 0, left: 0, behavior: 'auto' }
   },
 })
 

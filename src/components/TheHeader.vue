@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { contacts, navigation } from '../data/siteContent'
+import { navigation } from '../data/siteContent'
 
 const route = useRoute()
 const isMenuOpen = ref(false)
@@ -11,6 +11,8 @@ const goToSection = (sectionId) => ({ path: '/', hash: `#${sectionId}` })
 const goToApplication = () => ({ path: '/', hash: '#application' })
 
 const isHomeRoute = computed(() => route.name === 'home')
+const isOverlayMode = computed(() => isHomeRoute.value && !isElevated.value && !isMenuOpen.value)
+const headerNavigation = computed(() => navigation.filter((item) => item.id !== 'contacts'))
 
 const handleScroll = () => {
   isElevated.value = window.scrollY > 12
@@ -49,35 +51,50 @@ onBeforeUnmount(() => {
     >
       <div class="flex h-14 items-center justify-between gap-3 px-3 sm:h-16 sm:px-4">
         <RouterLink to="/" class="group inline-flex items-center gap-3">
-          <span
-            class="inline-flex size-8 items-center justify-center rounded-full bg-deepNavy font-heading text-sm font-bold text-milk transition group-hover:bg-terracotta"
+          <div
+            :class="[
+              'relative size-10 overflow-hidden rounded-full border bg-white shadow-sm sm:size-11',
+              isOverlayMode ? 'border-white/40' : 'border-deepNavy/20',
+            ]"
           >
-            Г
-          </span>
+            <img
+              src="/portfolio/logo.jpg"
+              alt="Логотип СК-Гарант"
+              class="h-full w-full scale-[1.22] object-cover object-top"
+              loading="eager"
+            />
+          </div>
           <div class="leading-tight">
-            <p class="font-heading text-sm font-extrabold text-deepNavy sm:text-base">СК Гаранд</p>
-            <p class="text-[11px] text-warmGray">Строительство домов под ключ</p>
+            <p :class="['font-heading text-sm font-extrabold sm:text-base', isOverlayMode ? 'text-white' : 'text-deepNavy']">
+              ООО «СК-Гарант»
+            </p>
+            <p :class="['text-[11px]', isOverlayMode ? 'text-white/80' : 'text-warmGray']">Строительно-монтажные работы</p>
           </div>
         </RouterLink>
 
         <nav class="hidden items-center gap-6 md:flex">
           <RouterLink
-            v-for="item in navigation"
+            v-for="item in headerNavigation"
             :key="item.id"
             :to="goToSection(item.id)"
-            class="text-sm font-medium text-deepNavy/85 transition hover:text-deepNavyHover"
+            :class="[
+              'text-sm font-medium transition',
+              isOverlayMode ? 'text-white/90 hover:text-terracotta' : 'text-deepNavy/85 hover:text-deepNavyHover',
+            ]"
           >
             {{ item.label }}
           </RouterLink>
         </nav>
 
         <div class="hidden items-center gap-3 md:flex">
-          <a :href="`tel:${contacts.phoneRaw}`" class="text-sm font-semibold text-deepNavy transition hover:text-deepNavyHover">
-            {{ contacts.phone }}
-          </a>
           <RouterLink
             :to="goToApplication()"
-            class="inline-flex h-10 items-center rounded-xl bg-deepNavy px-4 text-sm font-semibold text-white transition hover:bg-deepNavyHover"
+            :class="[
+              'inline-flex h-10 items-center rounded-xl px-4 text-sm font-semibold transition',
+              isOverlayMode
+                ? 'bg-terracotta text-graphite hover:bg-terracotta/90'
+                : 'bg-deepNavy text-white hover:bg-deepNavyHover',
+            ]"
           >
             Оставить заявку
           </RouterLink>
@@ -85,7 +102,10 @@ onBeforeUnmount(() => {
 
         <button
           type="button"
-          class="inline-flex size-10 items-center justify-center rounded-xl border border-deepNavy/20 text-deepNavy md:hidden"
+          :class="[
+            'inline-flex size-10 items-center justify-center rounded-xl border md:hidden',
+            isOverlayMode ? 'border-white/35 text-white bg-white/10' : 'border-deepNavy/20 text-deepNavy',
+          ]"
           aria-label="Открыть меню"
           @click="toggleMenu"
         >
@@ -100,7 +120,7 @@ onBeforeUnmount(() => {
 
       <div v-if="isMenuOpen" class="space-y-3 border-t border-deepNavy/10 p-3 md:hidden">
         <RouterLink
-          v-for="item in navigation"
+          v-for="item in headerNavigation"
           :key="`mobile-${item.id}`"
           :to="goToSection(item.id)"
           class="block rounded-xl border border-deepNavy/10 px-4 py-3 text-sm font-medium text-deepNavy"
@@ -114,13 +134,6 @@ onBeforeUnmount(() => {
         >
           Оставить заявку
         </RouterLink>
-
-        <a
-          :href="`tel:${contacts.phoneRaw}`"
-          class="block rounded-xl border border-deepNavy/10 px-4 py-3 text-center text-sm font-semibold text-deepNavy"
-        >
-          {{ contacts.phone }}
-        </a>
       </div>
     </div>
   </header>

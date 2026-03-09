@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Source materials (not used in runtime build)
+ООО СК-Гарант Портфолия/

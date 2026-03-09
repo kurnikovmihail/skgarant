@@ -7,13 +7,13 @@ const goToSection = (sectionId) => ({ path: '/', hash: `#${sectionId}` })
 </script>
 
 <template>
-  <footer class="mt-10 bg-deepNavy text-white">
+  <footer id="contacts" class="mt-10 scroll-mt-28 bg-deepNavy text-white">
     <div class="site-container py-10">
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         <div class="space-y-3">
-          <p class="font-heading text-xl font-bold">СК Гаранд</p>
+          <p class="font-heading text-xl font-bold">ООО «СК-Гарант»</p>
           <p class="text-sm text-white/70">
-            Строительство современных частных домов под ключ с прозрачным процессом и контролем качества.
+            Монолитные, фасадные, отделочные, инженерные работы и благоустройство объектов.
           </p>
         </div>
 
@@ -40,11 +40,12 @@ const goToSection = (sectionId) => ({ path: '/', hash: `#${sectionId}` })
             {{ contacts.email }}
           </a>
           <p class="text-sm text-white/70">{{ contacts.office }}</p>
+          <p class="text-sm text-white/70">{{ contacts.secondaryOffice }}</p>
         </div>
       </div>
 
       <div class="mt-8 border-t border-white/15 pt-5 text-xs text-white/55">
-        © {{ currentYear }} СК «Гаранд». Все права защищены.
+        © {{ currentYear }} ООО «СК-Гарант». Все права защищены.
       </div>
     </div>
   </footer>

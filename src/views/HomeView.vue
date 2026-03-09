@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import RevealBlock from '../components/RevealBlock.vue'
 import SectionTitle from '../components/SectionTitle.vue'
 import {
   aboutContent,
   advantages,
-  contacts,
+  coreProjects,
   heroContent,
   processSteps,
   projects,
@@ -34,6 +34,14 @@ const submitForm = () => {
     isFormSent.value = false
   }, 4000)
 }
+
+onMounted(() => {
+  if (!window.location.hash) {
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    })
+  }
+})
 </script>
 
 <template>
@@ -41,20 +49,20 @@ const submitForm = () => {
     <section id="hero" class="relative isolate min-h-[92svh] overflow-hidden pt-28 text-white sm:pt-32">
       <img
         :src="heroContent.image"
-        alt="Современный частный дом"
+        alt="Реализованный жилой проект ООО СК-Гарант"
         class="absolute inset-0 h-full w-full object-cover"
         loading="eager"
       />
       <div class="absolute inset-0 bg-hero-gradient"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(230,106,44,0.35),transparent_40%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(207,174,99,0.28),transparent_40%)]"></div>
 
       <div class="site-container relative z-10 flex min-h-[80svh] flex-col justify-center pb-12">
         <RevealBlock class="max-w-2xl space-y-6">
-          <span class="section-chip border-white/30 bg-white/10 text-white">Архитектура. Качество. Доверие.</span>
+          <span class="section-chip border-white/30 bg-white/10 text-white">Монолит. Фасады. Инженерия.</span>
           <h1 class="font-heading text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
             {{ heroContent.title }}
           </h1>
-          <p class="max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+          <p class="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
             {{ heroContent.subtitle }}
           </p>
           <div class="flex flex-col gap-3 sm:flex-row">
@@ -62,21 +70,18 @@ const submitForm = () => {
               :to="{ path: '/', hash: '#application' }"
               class="inline-flex h-12 items-center justify-center rounded-xl bg-deepNavy px-6 text-sm font-semibold text-white transition hover:bg-deepNavyHover"
             >
-              Рассчитать стоимость строительства
+              Обсудить проект
             </RouterLink>
             <RouterLink
               :to="{ path: '/', hash: '#projects' }"
               class="inline-flex h-12 items-center justify-center rounded-xl border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/20"
             >
-              Посмотреть проекты
+              Смотреть портфолио
             </RouterLink>
           </div>
         </RevealBlock>
 
-        <RevealBlock
-          class="mt-9 grid max-w-xl gap-3 text-sm sm:grid-cols-3 sm:gap-4"
-          :delay="130"
-        >
+        <RevealBlock class="mt-9 grid max-w-xl gap-3 text-sm sm:grid-cols-3 sm:gap-4" :delay="130">
           <div
             v-for="benefit in heroContent.benefits"
             :key="benefit"
@@ -96,7 +101,7 @@ const submitForm = () => {
         <RevealBlock>
           <SectionTitle
             eyebrow="О компании"
-            title="Надежный подрядчик с архитектурным подходом"
+            title="Надежный подрядчик для жилых и коммерческих объектов"
             :description="aboutContent.text"
           />
         </RevealBlock>
@@ -117,9 +122,34 @@ const submitForm = () => {
           </RevealBlock>
 
           <RevealBlock class="overflow-hidden rounded-3xl" :delay="120">
-            <img :src="aboutContent.image" alt="Команда на строительном объекте" class="h-full min-h-72 w-full object-cover" />
+            <img
+              :src="aboutContent.image"
+              alt="Объект в процессе строительства"
+              class="h-full min-h-72 w-full object-cover"
+              loading="lazy"
+            />
           </RevealBlock>
         </div>
+
+        <RevealBlock class="card-surface p-6 sm:p-8" :delay="160">
+          <SectionTitle
+            eyebrow="Внутренние данные"
+            title="Основные реализованные проекты"
+            description="Список ключевых проектов ООО «СК-Гарант» по основным направлениям работ."
+          />
+
+          <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <article
+              v-for="item in coreProjects"
+              :key="`${item.name}-${item.location}`"
+              class="rounded-xl border border-deepNavy/10 bg-fog p-4"
+            >
+              <p class="font-heading text-base font-bold text-deepNavy">{{ item.name }}</p>
+              <p class="mt-1 text-xs font-semibold uppercase tracking-[0.1em] text-warmGray">{{ item.location }}</p>
+              <p class="mt-2 text-sm text-warmGray">{{ item.description }}</p>
+            </article>
+          </div>
+        </RevealBlock>
       </div>
     </section>
 
@@ -128,9 +158,9 @@ const submitForm = () => {
         <RevealBlock>
           <SectionTitle
             centered
-            eyebrow="Услуги"
-            title="Закрываем весь цикл строительства"
-            description="От идеи и проектирования до сдачи дома с инженерией и гарантией на работы."
+            eyebrow="Виды работ"
+            title="Шесть профильных направлений ООО «СК-Гарант»"
+            description="От монолита и фасадов до инженерии и благоустройства территорий."
           />
         </RevealBlock>
 
@@ -138,12 +168,37 @@ const submitForm = () => {
           <RevealBlock
             v-for="(service, index) in services"
             :key="service.title"
-            class="card-surface h-full p-5 sm:p-6"
+            class="group card-surface h-full overflow-hidden"
             :delay="index * 70"
           >
-            <p class="font-heading text-xs font-bold tracking-[0.2em] text-terracotta">{{ service.code }}</p>
-            <h3 class="mt-3 font-heading text-lg font-bold text-deepNavy">{{ service.title }}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-warmGray">{{ service.description }}</p>
+            <div class="relative aspect-[16/10] overflow-hidden">
+              <img
+                :src="service.image"
+                :alt="`Услуга: ${service.title}`"
+                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-deepNavy/85 via-deepNavy/45 to-transparent"></div>
+              <p class="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 font-heading text-[11px] font-bold tracking-[0.16em] text-deepNavy">
+                {{ service.code }}
+              </p>
+              <h3 class="absolute inset-x-4 bottom-3 font-heading text-lg font-bold text-white">{{ service.title }}</h3>
+            </div>
+
+            <div class="flex h-full flex-col p-5 sm:p-6">
+              <p class="text-sm leading-relaxed text-warmGray">{{ service.description }}</p>
+
+              <ul class="mt-4 space-y-2 text-sm text-warmGray">
+                <li v-for="point in service.points" :key="point" class="flex gap-2">
+                  <span class="mt-[2px] text-terracotta">●</span>
+                  <span>{{ point }}</span>
+                </li>
+              </ul>
+
+              <p class="mt-5 rounded-xl bg-fog px-3 py-2 text-xs font-semibold text-deepNavy/80">
+                {{ service.result }}
+              </p>
+            </div>
           </RevealBlock>
         </div>
       </div>
@@ -154,8 +209,8 @@ const submitForm = () => {
         <RevealBlock>
           <SectionTitle
             eyebrow="Портфолио"
-            title="Реальные проекты, построенные нашей командой"
-            description="Каждый объект можно открыть и посмотреть детали, характеристики и этапы строительства."
+            title="Реальные объекты компании"
+            description="Каждый проект открыт с характеристиками, этапами и фото выполненных работ."
           />
         </RevealBlock>
 
@@ -177,8 +232,10 @@ const submitForm = () => {
                   class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-graphite/70 to-transparent"></div>
-                <p class="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-graphite">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/5"></div>
+                <p
+                  class="absolute bottom-3 left-3 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-graphite shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
+                >
                   {{ project.area }}
                 </p>
               </div>
@@ -207,9 +264,9 @@ const submitForm = () => {
       <div class="site-container space-y-8">
         <RevealBlock>
           <SectionTitle
-            eyebrow="Этапы строительства"
-            title="Понятный процесс без скрытых шагов"
-            description="Каждый этап фиксируется документально и сопровождается отчетностью для клиента."
+            eyebrow="Этапы работы"
+            title="Понятное взаимодействие от заявки до сдачи"
+            description="Каждый этап фиксируется в рабочей коммуникации с заказчиком и генподрядчиком."
           />
         </RevealBlock>
 
@@ -237,17 +294,17 @@ const submitForm = () => {
     <section class="section-block bg-deepNavy text-white">
       <div class="site-container grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
         <RevealBlock class="space-y-4">
-          <span class="section-chip border-white/25 bg-white/10 text-white">Почему выбирают нас</span>
+          <span class="section-chip border-white/25 bg-white/10 text-white">Конкурентные преимущества</span>
           <h2 class="font-heading text-2xl font-extrabold leading-tight sm:text-3xl lg:text-4xl">
-            Спокойный сервис и инженерная точность на каждом объекте
+            Лидирующие позиции за счет качества, опыта и адаптивности
           </h2>
           <p class="text-sm leading-relaxed text-white/75 sm:text-base">
-            Мы не обещаем невозможное. Мы выстраиваем прогнозируемый процесс, где каждое решение обосновано,
-            а результат подтвержден качеством работ.
+            По внутреннему сравнительному анализу компания выделяется профильной экспертизой, системным контролем
+            качества и гибкостью в работе с заказчиками.
           </p>
           <img
-            src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1200"
-            alt="Строительная площадка"
+            src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1400"
+            alt="Инженерные работы на парковке"
             class="mt-5 h-56 w-full rounded-2xl object-cover sm:h-64"
             loading="lazy"
           />
@@ -276,9 +333,9 @@ const submitForm = () => {
         <RevealBlock>
           <SectionTitle
             centered
-            eyebrow="Отзывы"
-            title="Клиенты о работе с СК «Гаранд»"
-            description="Репутация строится не обещаниями, а реализованными проектами и доверием семей, которые уже живут в своих домах."
+            eyebrow="Кейсы"
+            title="Ключевые результаты по реализованным объектам"
+            description="Факты из портфолио компании: крупные объемы, сложные инженерные и отделочные задачи."
           />
         </RevealBlock>
 
@@ -302,27 +359,28 @@ const submitForm = () => {
       <div class="site-container">
         <RevealBlock class="relative overflow-hidden rounded-3xl">
           <img
-            src="https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=1800"
-            alt="Строительство частного дома"
+            src="https://images.pexels.com/photos/260689/pexels-photo-260689.jpeg?auto=compress&cs=tinysrgb&w=1800"
+            alt="Инженерные работы на объекте"
             class="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-br from-deepNavy/88 via-deepNavyHover/80 to-graphite/75"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-deepNavy/95 via-deepNavyHover/90 to-graphite/86"></div>
+          <div class="absolute inset-0 bg-black/25"></div>
 
           <div class="relative grid gap-8 p-5 sm:p-8 lg:grid-cols-[1fr_0.95fr] lg:p-12">
-            <div class="space-y-4 text-white">
-              <span class="section-chip border-white/30 bg-white/10 text-white">Заявка на консультацию</span>
-              <h2 class="font-heading text-2xl font-extrabold leading-tight sm:text-3xl">
-                Обсудим строительство вашего дома
+            <div class="space-y-4 rounded-2xl border border-white/20 bg-black/25 p-5 text-white backdrop-blur-[2px] sm:p-6">
+              <span class="section-chip border-white/35 bg-white/15 text-white">Запрос на расчет</span>
+              <h2 class="font-heading text-2xl font-extrabold leading-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.55)] sm:text-3xl">
+                Обсудим ваш строительный проект
               </h2>
-              <p class="max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
-                Оставьте заявку и мы свяжемся с вами, чтобы обсудить задачи, бюджет и предложить оптимальный формат
-                строительства.
+              <p class="max-w-md text-sm leading-relaxed text-white/95 drop-shadow-[0_3px_10px_rgba(0,0,0,0.55)] sm:text-base">
+                Оставьте контакты, и мы свяжемся с вами для консультации по объекту, составу работ и формату
+                сотрудничества.
               </p>
-              <ul class="space-y-2 text-sm text-white/85">
+              <ul class="space-y-2 text-sm text-white/95 drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
                 <li>✓ Консультация бесплатно</li>
-                <li>✓ Без обязательств</li>
-                <li>✓ Ответ в рабочее время в течение 15 минут</li>
+                <li>✓ Работаем с частными и корпоративными заказчиками</li>
+                <li>✓ Быстрая обратная связь по заявке</li>
               </ul>
             </div>
 
@@ -330,7 +388,15 @@ const submitForm = () => {
               <div class="space-y-4">
                 <label class="block text-sm font-medium text-graphite">
                   Имя
-                  <input v-model="form.name" type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" class="form-input mt-2" required />
+                  <input
+                    v-model="form.name"
+                    type="text"
+                    name="name"
+                    autocomplete="name"
+                    placeholder="Как к вам обращаться"
+                    class="form-input mt-2"
+                    required
+                  />
                 </label>
 
                 <label class="block text-sm font-medium text-graphite">
@@ -351,7 +417,7 @@ const submitForm = () => {
                   <textarea
                     v-model="form.comment"
                     name="comment"
-                    placeholder="Площадь, участок, желаемые сроки"
+                    placeholder="Тип объекта, локация, задачи"
                     class="form-area mt-2"
                   ></textarea>
                 </label>
@@ -373,50 +439,5 @@ const submitForm = () => {
       </div>
     </section>
 
-    <section id="contacts" class="section-block scroll-mt-28 pt-4">
-      <div class="site-container grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
-        <RevealBlock class="card-surface p-5 sm:p-7">
-          <SectionTitle
-            eyebrow="Контакты"
-            title="Свяжитесь с нами удобным способом"
-            description="Офис работает в будни и субботу. Можно приехать на консультацию по предварительной записи."
-          />
-
-          <div class="mt-6 space-y-4 text-sm sm:text-base">
-            <a
-              :href="`tel:${contacts.phoneRaw}`"
-              class="flex items-start justify-between rounded-xl border border-fog px-4 py-3 transition hover:border-terracotta/40"
-            >
-              <span class="text-warmGray">Телефон</span>
-              <span class="font-semibold text-graphite">{{ contacts.phone }}</span>
-            </a>
-            <a
-              :href="`mailto:${contacts.email}`"
-              class="flex items-start justify-between rounded-xl border border-fog px-4 py-3 transition hover:border-terracotta/40"
-            >
-              <span class="text-warmGray">Email</span>
-              <span class="font-semibold text-graphite">{{ contacts.email }}</span>
-            </a>
-            <div class="flex items-start justify-between rounded-xl border border-fog px-4 py-3">
-              <span class="text-warmGray">Адрес</span>
-              <span class="max-w-[55%] text-right font-semibold text-graphite">{{ contacts.office }}</span>
-            </div>
-            <div class="flex items-start justify-between rounded-xl border border-fog px-4 py-3">
-              <span class="text-warmGray">Режим работы</span>
-              <span class="font-semibold text-graphite">{{ contacts.schedule }}</span>
-            </div>
-          </div>
-        </RevealBlock>
-
-        <RevealBlock class="overflow-hidden rounded-2xl border border-fog bg-white" :delay="100">
-          <iframe
-            :src="contacts.mapEmbed"
-            title="Карта офиса СК Гаранд"
-            class="h-[340px] w-full border-0 sm:h-full sm:min-h-[430px]"
-            loading="lazy"
-          ></iframe>
-        </RevealBlock>
-      </div>
-    </section>
   </main>
 </template>
