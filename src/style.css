@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Montserrat:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: only light;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply m-0 min-w-[320px] bg-milk font-body text-graphite antialiased;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+
+  ::selection {
+    @apply bg-terracotta/30 text-graphite;
+  }
+}
+
+@layer components {
+  .site-container {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-block {
+    @apply py-14 sm:py-16 lg:py-24;
+  }
+
+  .section-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-deepNavy/15 bg-white/90 px-3 py-1 text-xs font-medium tracking-[0.12em] text-deepNavy;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-deepNavy/10 bg-white shadow-card backdrop-blur;
+  }
+
+  .form-input {
+    @apply h-12 w-full rounded-xl border border-deepNavy/20 bg-white px-4 text-sm text-graphite outline-none transition focus:border-terracotta focus:ring-2 focus:ring-terracotta/20;
+  }
+
+  .form-area {
+    @apply min-h-28 w-full resize-none rounded-xl border border-deepNavy/20 bg-white px-4 py-3 text-sm text-graphite outline-none transition focus:border-terracotta focus:ring-2 focus:ring-terracotta/20;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
