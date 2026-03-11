@@ -3,11 +3,12 @@ import { computed, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import RevealBlock from '../components/RevealBlock.vue'
 import SectionTitle from '../components/SectionTitle.vue'
-import { projects } from '../data/siteContent'
+import { useProjects } from '../composables/useProjects'
 
 const route = useRoute()
+const { projects, isLoading } = useProjects()
 
-const project = computed(() => projects.find((item) => item.slug === route.params.slug))
+const project = computed(() => projects.value.find((item) => item.slug === route.params.slug))
 
 const projectForm = ref({
   name: '',
@@ -16,6 +17,7 @@ const projectForm = ref({
 })
 
 const isProjectFormSent = ref(false)
+const formSectionRef = ref(null)
 
 const submitProjectForm = () => {
   if (!projectForm.value.name.trim() || !projectForm.value.phone.trim()) {
@@ -33,10 +35,14 @@ const submitProjectForm = () => {
     isProjectFormSent.value = false
   }, 4000)
 }
+
+const scrollToProjectForm = () => {
+  formSectionRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 </script>
 
 <template>
-  <main class="pb-24 pt-24 md:pt-28">
+  <main class="page-main">
     <section v-if="project" class="space-y-12">
       <div class="relative isolate overflow-hidden pb-8">
         <div class="absolute inset-0 bg-gradient-to-br from-deepNavy via-deepNavyHover to-graphite"></div>
@@ -48,7 +54,7 @@ const submitProjectForm = () => {
         <div class="site-container relative z-10 grid gap-6 py-14 text-white sm:py-20 lg:grid-cols-[1fr_minmax(0,34rem)] lg:items-end">
           <RevealBlock class="space-y-5 rounded-2xl border border-white/20 bg-black/30 p-5 backdrop-blur-[2px] sm:p-6">
             <RouterLink
-              :to="{ path: '/', hash: '#projects' }"
+              to="/projects"
               class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/90"
             >
               <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,15 +78,8 @@ const submitProjectForm = () => {
           </RevealBlock>
 
           <RevealBlock class="lg:justify-self-end" :delay="90">
-            <figure
-              class="overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-2 shadow-[0_18px_44px_rgba(0,0,0,0.4)] backdrop-blur"
-            >
-              <img
-                :src="project.heroImage"
-                :alt="`${project.title} превью`"
-                class="aspect-[4/3] w-full rounded-xl object-cover"
-                loading="eager"
-              />
+            <figure class="overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-2 shadow-[0_18px_44px_rgba(0,0,0,0.4)] backdrop-blur">
+              <img :src="project.heroImage" :alt="`${project.title} превью`" class="aspect-[4/3] w-full rounded-xl object-cover" loading="eager" />
             </figure>
           </RevealBlock>
         </div>
@@ -119,54 +118,38 @@ const submitProjectForm = () => {
         </RevealBlock>
 
         <RevealBlock class="card-surface p-5 sm:p-7" :delay="80">
-          <SectionTitle
-            eyebrow="Этапы"
-            title="Как выполнялись работы"
-            description="Пошаговый процесс реализации проекта на объекте."
-          />
+          <SectionTitle eyebrow="Этапы" title="Как выполнялись работы" description="Пошаговый процесс реализации проекта на объекте." />
 
           <ol class="mt-6 space-y-3">
-            <li
-              v-for="(stage, index) in project.buildStages"
-              :key="stage"
-              class="rounded-xl border border-fog bg-milk px-4 py-4"
-            >
+            <li v-for="(stage, index) in project.buildStages" :key="stage" class="rounded-xl border border-fog bg-milk px-4 py-4">
               <p class="text-xs font-semibold uppercase tracking-[0.12em] text-deepNavy/70">Этап {{ index + 1 }}</p>
               <p class="mt-1 text-sm font-medium text-graphite sm:text-base">{{ stage }}</p>
             </li>
           </ol>
 
-          <a
-            href="#project-application"
+          <button
+            type="button"
             class="mt-6 inline-flex h-12 w-full items-center justify-center rounded-xl bg-deepNavy px-6 text-sm font-semibold text-white transition hover:bg-deepNavyHover"
+            @click="scrollToProjectForm"
           >
             Оставить заявку по проекту
-          </a>
+          </button>
         </RevealBlock>
       </div>
 
       <section class="site-container space-y-6">
         <RevealBlock>
-          <SectionTitle
-            eyebrow="Галерея"
-            title="Фото выполненных работ"
-            description="Подборка снимков по этапам и зонам проекта."
-          />
+          <SectionTitle eyebrow="Галерея" title="Фото выполненных работ" description="Подборка снимков по этапам и зонам проекта." />
         </RevealBlock>
 
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <RevealBlock
-            v-for="(image, index) in project.gallery"
-            :key="image"
-            :delay="index * 70"
-            class="overflow-hidden rounded-2xl"
-          >
+          <RevealBlock v-for="(image, index) in project.gallery" :key="image" :delay="index * 70" class="overflow-hidden rounded-2xl">
             <img :src="image" :alt="`${project.title} фото ${index + 1}`" class="aspect-[4/3] h-full w-full object-cover" loading="lazy" />
           </RevealBlock>
         </div>
       </section>
 
-      <section id="project-application" class="site-container scroll-mt-28">
+      <section ref="formSectionRef" class="site-container scroll-mt-28">
         <RevealBlock class="relative isolate overflow-hidden rounded-3xl border border-deepNavy/15 bg-deepNavy text-white">
           <div class="absolute inset-0 bg-gradient-to-br from-deepNavy via-deepNavyHover to-graphite"></div>
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(207,174,99,0.22),transparent_42%)]"></div>
@@ -176,8 +159,7 @@ const submitProjectForm = () => {
               <span class="section-chip border-white/30 bg-white/10 text-white">Заявка по проекту</span>
               <h2 class="font-heading text-2xl font-extrabold leading-tight sm:text-3xl">Обсудим проект «{{ project.title }}»</h2>
               <p class="text-sm leading-relaxed text-white/90 sm:text-base">
-                Оставьте контакты, и мы свяжемся с вами по срокам, стоимости и формату выполнения работ по этому
-                объекту.
+                Оставьте контакты, и мы свяжемся с вами по срокам, стоимости и формату выполнения работ по этому объекту.
               </p>
               <ul class="space-y-2 text-sm text-white/90">
                 <li>✓ Перезвоним и уточним задачу</li>
@@ -208,6 +190,8 @@ const submitProjectForm = () => {
                     type="tel"
                     name="phone"
                     autocomplete="tel"
+                    inputmode="tel"
+                    enterkeyhint="send"
                     placeholder="+7 (___) ___-__-__"
                     class="form-input mt-2"
                     required
@@ -241,15 +225,18 @@ const submitProjectForm = () => {
       </section>
     </section>
 
+    <section v-else-if="isLoading" class="site-container py-20">
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div v-for="n in 6" :key="`loading-${n}`" class="h-60 animate-pulse rounded-2xl bg-fog"></div>
+      </div>
+    </section>
+
     <section v-else class="site-container py-20">
       <div class="card-surface mx-auto max-w-xl space-y-4 p-8 text-center">
         <h1 class="font-heading text-2xl font-bold text-deepNavy">Проект не найден</h1>
-        <p class="text-sm text-warmGray">Возможно, ссылка устарела. Вернитесь на главную и выберите проект из портфолио.</p>
-        <RouterLink
-          to="/"
-          class="inline-flex h-11 items-center justify-center rounded-xl bg-deepNavy px-5 text-sm font-semibold text-white transition hover:bg-deepNavyHover"
-        >
-          На главную
+        <p class="text-sm text-warmGray">Возможно, ссылка устарела. Вернитесь в список проектов и выберите нужный кейс.</p>
+        <RouterLink to="/projects" class="inline-flex h-11 items-center justify-center rounded-xl bg-deepNavy px-5 text-sm font-semibold text-white transition hover:bg-deepNavyHover">
+          К проектам
         </RouterLink>
       </div>
     </section>

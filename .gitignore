@@ -25,3 +25,12 @@ dist-ssr
 
 # Source materials (not used in runtime build)
 ООО СК-Гарант Портфолия/
+
+# Local uploads for admin API
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Local environment
+.env
+.env.*
+!.env.docker.example

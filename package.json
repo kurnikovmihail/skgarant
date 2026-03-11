@@ -5,10 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "node --watch backend/server.js",
+    "docker:up": "docker compose up --build -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f --tail=200",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
     "vue": "^3.5.25",
     "vue-router": "^5.0.3"
   },

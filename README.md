@@ -9,6 +9,55 @@ npm install
 npm run dev
 ```
 
+Отдельно запустить API для админки проектов:
+
+```bash
+npm run dev:api
+```
+
+После этого доступно:
+- `http://localhost:5173/admin/login` — вход администратора
+- `http://localhost:5173/admin/projects/new` — создание проекта с загрузкой изображений
+
+## Локальный запуск через Docker (рекомендуется)
+
+1. Подготовить env:
+
+```bash
+cp .env.docker.example .env
+```
+
+2. Изменить в `.env` как минимум:
+- `ADMIN_PASSWORD`
+- `SESSION_SECRET`
+
+3. Поднять контейнеры:
+
+```bash
+npm run docker:up
+```
+
+4. Проверка:
+- сайт: `http://localhost:8080`
+- админка: `http://localhost:8080/admin/login`
+- API health: `http://localhost:8080/api/health`
+
+Данные сохраняются в Docker volumes:
+- `skgarant_data` (проекты)
+- `skgarant_uploads` (изображения)
+
+Остановка:
+
+```bash
+npm run docker:down
+```
+
+Логи:
+
+```bash
+npm run docker:logs
+```
+
 ## Продакшен-сборка
 
 ```bash
@@ -59,3 +108,28 @@ DEPLOY_PATH=/var/www/skgarant \
 1. Выполнить `npm run build`.
 2. Скопировать содержимое `dist/` в директорию сайта на сервере (например, `/var/www/skgarant`).
 3. Использовать `try_files $uri $uri/ /index.html;` в `location /`, чтобы работали прямые переходы на страницы проектов.
+
+## Продакшен для админки проектов (API + загрузка фото)
+
+Чтобы работали создание проектов и загрузка изображений:
+
+1. Разместить код проекта на сервере в `/opt/skgarant`.
+2. Подключить Nginx-конфиг с прокси на API:
+   - шаблон: `deploy/nginx.server.conf`
+3. Установить systemd unit:
+   - шаблон: `deploy/skgarant-api.service`
+4. Задать безопасные значения:
+   - `ADMIN_PASSWORD`
+   - `SESSION_SECRET`
+
+Пример команд:
+
+```bash
+sudo cp deploy/skgarant-api.service /etc/systemd/system/skgarant-api.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now skgarant-api
+
+sudo cp deploy/nginx.server.conf /etc/nginx/sites-available/skgarant
+sudo ln -sf /etc/nginx/sites-available/skgarant /etc/nginx/sites-enabled/skgarant
+sudo nginx -t && sudo systemctl reload nginx
+```

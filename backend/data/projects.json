@@ -1,0 +1,254 @@
+[
+  {
+    "slug": "zhk-skandinaviya-monolit",
+    "title": "ЖК «Скандинавия»",
+    "area": "Монолитные работы",
+    "city": "Москва",
+    "timeline": "Застройщик: ГК А101",
+    "image": "/portfolio/zhk-skandinaviya.jpg",
+    "heroImage": "/portfolio/zhk-skandinaviya.jpg",
+    "summary": "Монолитный цикл на объекте жилой застройки в Москве.",
+    "location": "ЖК «Скандинавия», Москва",
+    "family": "Заказчик: ГК А101",
+    "technology": "Монолитные железобетонные конструкции",
+    "features": [
+      "Подготовка и армирование конструкций",
+      "Бетонирование с контролем технологических пауз",
+      "Соблюдение требований по качеству и срокам",
+      "Взаимодействие с генподрядчиком на объекте"
+    ],
+    "buildStages": [
+      "Подготовка рабочей зоны и разбивка осей",
+      "Армирование и монтаж опалубки",
+      "Бетонирование и контроль набора прочности",
+      "Передача фронта смежным подрядчикам"
+    ],
+    "gallery": [
+      "/portfolio/zhk-skandinaviya.jpg",
+      "/portfolio/odinburg-monolit.jpg",
+      "/portfolio/odinburg-kladka.jpg",
+      "/portfolio/odingrad-yard.jpg"
+    ]
+  },
+  {
+    "slug": "zhk-luchi-engineering",
+    "title": "ЖК «Лучи» (парковка)",
+    "area": "Инженерные работы",
+    "city": "Москва",
+    "timeline": "Заказчик: ГК ЛСР",
+    "image": "/portfolio/zhk-luchi.jpg",
+    "heroImage": "/portfolio/luchi-parking.jpg",
+    "summary": "Инженерные работы на парковке: электричество, вентиляция и отопление.",
+    "location": "ЖК «Лучи», Москва",
+    "family": "Заказчик: ГК ЛСР",
+    "technology": "Инженерные сети парковочного пространства",
+    "features": [
+      "Монтаж вентиляционных трасс",
+      "Прокладка электроснабжения и слаботочных линий",
+      "Организация узлов отопления",
+      "Проверка и подготовка к вводу в эксплуатацию"
+    ],
+    "buildStages": [
+      "Проработка инженерных трасс по проекту",
+      "Монтаж вентиляции и силовых линий",
+      "Сборка инженерных узлов и подключение",
+      "Пусконаладка и сдача работ"
+    ],
+    "gallery": [
+      "/portfolio/luchi-parking.jpg",
+      "/portfolio/sputnik-engineering-1.jpg",
+      "/portfolio/sputnik-engineering-2.jpg",
+      "/portfolio/sputnik-engineering-3.jpg"
+    ]
+  },
+  {
+    "slug": "zhk-odinburg-fasad",
+    "title": "ЖК «Одинбург / Одинград»",
+    "area": "Фасадные работы",
+    "city": "Москва",
+    "timeline": "ГК АСР / ГК Инград",
+    "image": "/portfolio/odinburg-finish.jpg",
+    "heroImage": "/portfolio/odinburg-finish.jpg",
+    "summary": "Кладка и фасадные работы на объектах жилой застройки.",
+    "location": "ЖК «Одинбург» и «Одинград», Москва",
+    "family": "Заказчики: ГК АСР и ГК Инград",
+    "technology": "Кладка, фасадные системы, узлы примыканий",
+    "features": [
+      "Фасадные работы на жилых корпусах",
+      "Кладка с контролем геометрии и швов",
+      "Согласование работ со смежными подрядчиками",
+      "Соблюдение требований проекта и заказчика"
+    ],
+    "buildStages": [
+      "Подготовка фасадных участков",
+      "Выполнение кладки и монтажных работ",
+      "Проверка качества и устранение замечаний",
+      "Сдача фасадных объемов заказчику"
+    ],
+    "gallery": [
+      "/portfolio/odinburg-kladka.jpg",
+      "/portfolio/odinburg-finish.jpg",
+      "/portfolio/odingrad-yard.jpg",
+      "/portfolio/ingrad-render.jpg"
+    ]
+  },
+  {
+    "slug": "gorki-2-finishing",
+    "title": "Усадьба в Горки-2",
+    "area": "Отделочные работы",
+    "city": "Московская область",
+    "timeline": "Частный заказчик",
+    "image": "/portfolio/gorki-lobby-1.jpg",
+    "heroImage": "/portfolio/gorki-corridor.jpg",
+    "summary": "Комплекс внутренней отделки в частной усадьбе.",
+    "location": "Горки-2, Московская область",
+    "family": "Частный заказчик",
+    "technology": "Внутренняя отделка и финишные покрытия",
+    "features": [
+      "Отделка входных и проходных зон",
+      "Работы в санузлах и вспомогательных помещениях",
+      "Финишные покрытия стен, пола и потолка",
+      "Сдача помещений в эксплуатационном состоянии"
+    ],
+    "buildStages": [
+      "Подготовка поверхностей и черновые операции",
+      "Монтаж декоративных и функциональных элементов",
+      "Финишная отделка и детализация",
+      "Финальная проверка и сдача заказчику"
+    ],
+    "gallery": [
+      "/portfolio/gorki-lobby-1.jpg",
+      "/portfolio/gorki-lobby-2.jpg",
+      "/portfolio/gorki-bathroom.jpg",
+      "/portfolio/gorki-corridor.jpg"
+    ]
+  },
+  {
+    "slug": "troitsk-hotel-entry",
+    "title": "Отель, г. Троицк",
+    "area": "Входная группа и МОП",
+    "city": "Троицк",
+    "timeline": "Заказчик: ИП Хитров П.",
+    "image": "/portfolio/troitsk-entry-1.jpg",
+    "heroImage": "/portfolio/troitsk-common-2.jpg",
+    "summary": "Оформление входной группы и мест общего пользования в отеле.",
+    "location": "Отель, г. Троицк",
+    "family": "Заказчик: ИП Хитров П.",
+    "technology": "Отделочные работы входных зон и МОП",
+    "features": [
+      "Отделка входной группы отеля",
+      "Обновление мест общего пользования",
+      "Подбор материалов с учетом нагрузки и эксплуатации",
+      "Контроль качества на каждом этапе"
+    ],
+    "buildStages": [
+      "Подготовка помещений и демонтажные операции",
+      "Черновой цикл и монтаж инженерных закладных",
+      "Финишная отделка входных и коридорных зон",
+      "Сдача готовых помещений заказчику"
+    ],
+    "gallery": [
+      "/portfolio/troitsk-entry-1.jpg",
+      "/portfolio/troitsk-entry-2.jpg",
+      "/portfolio/troitsk-common-1.jpg",
+      "/portfolio/troitsk-common-2.jpg"
+    ]
+  },
+  {
+    "slug": "gorki-park-entry-groups",
+    "title": "Горки Парк",
+    "area": "Отделка входных групп",
+    "city": "Московская область",
+    "timeline": "Заказчик: ГК Самолет",
+    "image": "/portfolio/gorki-park-entry-1.jpg",
+    "heroImage": "/portfolio/gorki-park-entry-2.jpg",
+    "summary": "Работы по отделке входных групп и общих пространств.",
+    "location": "Горки Парк, Московская область",
+    "family": "Заказчик: ГК Самолет",
+    "technology": "Внутренняя отделка входных узлов",
+    "features": [
+      "Комплекс отделочных работ по входным группам",
+      "Согласование решений с требованиями девелопера",
+      "Контроль качества материалов и исполнения",
+      "Подготовка пространств к эксплуатации"
+    ],
+    "buildStages": [
+      "Подготовительный и черновой цикл",
+      "Монтаж отделочных материалов",
+      "Финишная доводка зон общего пользования",
+      "Сдача этапов заказчику"
+    ],
+    "gallery": [
+      "/portfolio/gorki-park-entry-1.jpg",
+      "/portfolio/gorki-park-entry-2.jpg",
+      "/portfolio/office-common-1.jpg",
+      "/portfolio/office-common-2.jpg"
+    ]
+  },
+  {
+    "slug": "zhk-sputnik-engineering",
+    "title": "ЖК «Спутник»",
+    "area": "Инженерные работы",
+    "city": "Москва",
+    "timeline": "Заказчик: ГК Самолет",
+    "image": "/portfolio/sputnik-engineering-1.jpg",
+    "heroImage": "/portfolio/sputnik-engineering-5.jpg",
+    "summary": "Инженерный блок работ на объекте жилого комплекса.",
+    "location": "ЖК «Спутник», Москва",
+    "family": "Заказчик: ГК Самолет",
+    "technology": "Инженерные сети, вентиляция, трубопроводы",
+    "features": [
+      "Монтаж трубопроводных и вентиляционных трасс",
+      "Сборка инженерных узлов и подключений",
+      "Работы в технических помещениях и парковке",
+      "Подготовка к дальнейшей пусконаладке"
+    ],
+    "buildStages": [
+      "Разметка и подготовка инженерных зон",
+      "Монтаж магистралей и оборудования",
+      "Подключение и проверка узлов",
+      "Передача работ под финальные испытания"
+    ],
+    "gallery": [
+      "/portfolio/sputnik-engineering-1.jpg",
+      "/portfolio/sputnik-engineering-2.jpg",
+      "/portfolio/sputnik-engineering-3.jpg",
+      "/portfolio/sputnik-engineering-4.jpg",
+      "/portfolio/sputnik-engineering-5.jpg",
+      "/portfolio/sputnik-engineering-6.jpg",
+      "/portfolio/sputnik-engineering-7.jpg"
+    ]
+  },
+  {
+    "slug": "landscaping-regional-projects",
+    "title": "Благоустройство и частные объекты",
+    "area": "Благоустройство",
+    "city": "Москва / Нальчик / Пятигорск",
+    "timeline": "А101 и частные заказчики",
+    "image": "/portfolio/vatutinki-landscape.jpg",
+    "heroImage": "/portfolio/nalchik-facade-2.jpg",
+    "summary": "Благоустройство, фасадные работы и зоны отдыха на частных и жилых объектах.",
+    "location": "Новые Ватутинки, Нальчик, Пятигорск",
+    "family": "Заказчики: А101 и частные клиенты",
+    "technology": "Озеленение, фасады, устройство зон отдыха",
+    "features": [
+      "Благоустройство территории на ЖК Новые Ватутинки",
+      "Фасадные работы и озеленение в Нальчике",
+      "Зона отдыха у бассейна в частном проекте Пятигорска",
+      "Работы по внешнему виду и функциональности территории"
+    ],
+    "buildStages": [
+      "Подготовка территории и инженерных подводов",
+      "Монтаж элементов благоустройства и фасадов",
+      "Озеленение и организация зон отдыха",
+      "Финальная приемка работ"
+    ],
+    "gallery": [
+      "/portfolio/vatutinki-landscape.jpg",
+      "/portfolio/nalchik-facade-1.jpg",
+      "/portfolio/nalchik-facade-2.jpg",
+      "/portfolio/pyatigorsk-pool-1.jpg",
+      "/portfolio/pyatigorsk-pool-2.jpg"
+    ]
+  }
+]

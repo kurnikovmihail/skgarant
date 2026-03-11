@@ -1,0 +1,19 @@
+[Unit]
+Description=SK-Garant API
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/skgarant
+Environment=NODE_ENV=production
+Environment=API_PORT=3001
+Environment=ADMIN_USERNAME=admin
+Environment=ADMIN_PASSWORD=change-this-password
+Environment=SESSION_SECRET=change-this-secret
+ExecStart=/usr/bin/node /opt/skgarant/backend/server.js
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

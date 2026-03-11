@@ -11,10 +11,15 @@
 
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 6.25rem;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
   }
 
   body {
     @apply m-0 min-w-[320px] bg-milk font-body text-graphite antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   * {
@@ -28,6 +33,30 @@
   ::selection {
     @apply bg-terracotta/30 text-graphite;
   }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cfae63 #f5f7f7;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #f5f7f7;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #cfae63 0%, #b8944a 100%);
+    border: 2px solid #f5f7f7;
+    border-radius: 9999px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #d7bc7d 0%, #c79f52 100%);
+  }
 }
 
 @layer components {
@@ -39,6 +68,17 @@
     @apply py-14 sm:py-16 lg:py-24;
   }
 
+  .page-main {
+    @apply pt-24 md:pt-28;
+    padding-bottom: calc(5.8rem + env(safe-area-inset-bottom));
+  }
+
+  @media (min-width: 768px) {
+    .page-main {
+      padding-bottom: 0;
+    }
+  }
+
   .section-chip {
     @apply inline-flex items-center gap-2 rounded-full border border-deepNavy/15 bg-white/90 px-3 py-1 text-xs font-medium tracking-[0.12em] text-deepNavy;
   }
@@ -48,11 +88,11 @@
   }
 
   .form-input {
-    @apply h-12 w-full rounded-xl border border-deepNavy/20 bg-white px-4 text-sm text-graphite outline-none transition focus:border-terracotta focus:ring-2 focus:ring-terracotta/20;
+    @apply h-12 w-full rounded-xl border border-deepNavy/20 bg-white px-4 text-base text-graphite outline-none transition focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 sm:text-sm;
   }
 
   .form-area {
-    @apply min-h-28 w-full resize-none rounded-xl border border-deepNavy/20 bg-white px-4 py-3 text-sm text-graphite outline-none transition focus:border-terracotta focus:ring-2 focus:ring-terracotta/20;
+    @apply min-h-28 w-full resize-none rounded-xl border border-deepNavy/20 bg-white px-4 py-3 text-base text-graphite outline-none transition focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 sm:text-sm;
   }
 }
 
